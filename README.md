@@ -12,7 +12,7 @@ Functions:
 Requirement:
 --------------
 - Sensordrone by [Sensorcon.com](http://sensorcon.com/products/sensordrone-multisensor-tool)
-- optional: [CO2-Modul](http://www.mb-systemtechnik.de/produkte_co2_messung_co2_sensor_modul_mit_ausgang.htm)
+- optional: [CO2-Modul](http://www.mb-systemtechnik.de/produkte_co2_messung_co2_sensor_modul_mit_ausgang.htm) via UART
 
 Development:
 --------------
