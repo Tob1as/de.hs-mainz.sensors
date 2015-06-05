@@ -7,5 +7,5 @@ public class Config {
 	 */
 	
 	
-	
+	// http://www.mkyong.com/java/java-properties-file-examples/
 }

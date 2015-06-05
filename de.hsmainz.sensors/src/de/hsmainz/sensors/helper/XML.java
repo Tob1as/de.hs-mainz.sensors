@@ -1,6 +1,7 @@
 package de.hsmainz.sensors.helper;
 
-import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -14,71 +15,138 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
+import org.w3c.dom.Element; 
+import org.xml.sax.SAXException;
 
-public class XML {
-	
-	// TODO XML mit neuen Messwerten erweitern, statt zu überschreiben!
+public class XML implements Output {
 	
 	/*
 	 * Write Measurements in XML
 	 */
-	public void writeMeasureInXML(String date2, String time2, Float humidity2, Float irtemp2, Float pressure2, Float rgb2, Float temp2, Float battery2) {
-		// http://www.mkyong.com/java/how-to-create-xml-file-in-java-dom/
-		// http://stackoverflow.com/questions/1384802/java-how-to-indent-xml-generated-by-transformer
-		// http://kohnlehome.de/java/jdom.pdf
+	
+	/*
+	 * Help:
+	 * 
+	 * http://www.mkyong.com/tutorials/java-xml-tutorials/
+	 * http://stackoverflow.com/questions/1384802/java-how-to-indent-xml-generated-by-transformer
+	 * http://www.tutorialspoint.com/java_xml/java_dom_parser.htm
+	 * http://examples.javacodegeeks.com/core-java/xml/dom/add-node-to-dom-document/ AND http://examples.javacodegeeks.com/core-java/xml/dom/add-text-node-to-dom-document/
+	 */
+
+	@Override
+	public void write(Variables variables) {
+		this.writeMeasureInXML(variables);
+	}
+	
+	private void writeMeasureInXML(Variables variables) {
 		try {
 			 
 			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+			//docFactory.setValidating(false);
 			DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 	 
-			// root elements
-			Document doc = docBuilder.newDocument();
-			Element rootElement = doc.createElement("sensors");
-			doc.appendChild(rootElement);
+			
+			Document doc = null;
+			Element rootElement = null;
+			// Load file with root elements and datas
+			if (variables.getFilenameXML().exists()) {
+				doc = docBuilder.parse(new FileInputStream(variables.getFilenameXML()));
+				rootElement = doc.getDocumentElement();
+			}
+			// Create file with root elements
+			if (!variables.getFilenameXML().exists()) {
+				doc = docBuilder.newDocument();
+				rootElement = doc.createElement("sensors");
+				doc.appendChild(rootElement);
+			}
+			
 	 
 			// measure elements
 			Element measure = doc.createElement("measure");
-			rootElement.appendChild(measure);
+			rootElement.appendChild(measure); // "sensors" instead "rootElement" when add new measured in a exitens xml file for whitespace (indent-amount) ??
 	 
 			// set attribute to measure element
 			Attr attr = doc.createAttribute("id");
-			attr.setValue(date2+"-"+time2);
+			attr.setValue(variables.getId());
 			measure.setAttributeNode(attr);
 	 
 			// shorten way
-			// measure.setAttribute("id", "date2+"-"+time2");
+			// measure.setAttribute("id", "variables.getId()");
 	 
+			// date elements
+			Element date = doc.createElement("date");
+			date.appendChild(doc.createTextNode(variables.getDate()));
+			measure.appendChild(date);
+			
+			// time elements
+			Element time = doc.createElement("time");
+			time.appendChild(doc.createTextNode(variables.getTime()));
+			measure.appendChild(time);
+			
+			// battery elements
+			Element battery = doc.createElement("battery");
+			battery.appendChild(doc.createTextNode(String.format("%.2f", variables.getBattery())));
+			measure.appendChild(battery);
+			
 			// humidity elements
 			Element humidity = doc.createElement("humidity");
-			humidity.appendChild(doc.createTextNode(String.format("%.2f", humidity2)));
+			humidity.appendChild(doc.createTextNode(String.format("%.2f", variables.getHumidity())));
 			measure.appendChild(humidity);
 	 
-			// irtemp elements
-			Element irtemp = doc.createElement("irtemp");
-			irtemp.appendChild(doc.createTextNode(String.format("%.2f", irtemp2)));
-			measure.appendChild(irtemp);
+			// irtemperature elements
+			Element irtemperature = doc.createElement("irtemperature");
+			irtemperature.appendChild(doc.createTextNode(String.format("%.2f", variables.getIrtemperature())));
+			measure.appendChild(irtemperature);
+			
+			// temperature elements
+			Element temperature = doc.createElement("temperature");
+			temperature.appendChild(doc.createTextNode(String.format("%.2f", variables.getTemperature())));
+			measure.appendChild(temperature);
+			
+			// dewpoint elements
+			Element dewpoint = doc.createElement("dewpoint");
+			dewpoint.appendChild(doc.createTextNode(String.format("%.2f", variables.getDewpoint())));
+			measure.appendChild(dewpoint);
 	 
 			// pressure elements
 			Element pressure = doc.createElement("pressure");
-			pressure.appendChild(doc.createTextNode(String.format("%.2f", pressure2)));
+			pressure.appendChild(doc.createTextNode(String.format("%.2f", variables.getPressure())));
 			measure.appendChild(pressure);
 	 
 			// rgb elements
 			Element rgb = doc.createElement("lux");
-			rgb.appendChild(doc.createTextNode(String.format("%.2f", rgb2)));
+			rgb.appendChild(doc.createTextNode(String.format("%.2f", variables.getRgb())));
 			measure.appendChild(rgb);
 			
-			// temp elements
-			Element temp = doc.createElement("temp");
-			temp.appendChild(doc.createTextNode(String.format("%.2f", temp2)));
-			measure.appendChild(temp);
+			// altitude elements
+			Element altitude = doc.createElement("altitude");
+			altitude.appendChild(doc.createTextNode(String.valueOf(variables.getAltitude())));
+			measure.appendChild(altitude);
 			
-			// battery elements
-			Element battery = doc.createElement("battery");
-			battery.appendChild(doc.createTextNode(String.format("%.2f", battery2)));
-			measure.appendChild(battery);
-
+			// capacitance elements
+			Element capacitance = doc.createElement("capacitance");
+			capacitance.appendChild(doc.createTextNode(String.valueOf(variables.getCapacitance())));
+			measure.appendChild(capacitance);
+			
+			// oxidizinggas elements
+			Element oxidizinggas = doc.createElement("oxidizinggas");
+			oxidizinggas.appendChild(doc.createTextNode(String.format("%.2f", variables.getOxidizinggas())));
+			measure.appendChild(oxidizinggas);
+			
+			// precisiongas elements
+			Element precisiongas = doc.createElement("precisiongas");
+			precisiongas.appendChild(doc.createTextNode(String.valueOf(variables.getPrecisiongas())));
+			measure.appendChild(precisiongas);
+			
+			// reducinggas elements
+			Element reducinggas = doc.createElement("reducinggas");
+			reducinggas.appendChild(doc.createTextNode(String.format("%.2f", variables.getReducinggas())));
+			measure.appendChild(reducinggas);
+			
+			// uart/CO2 elements
+			Element co2 = doc.createElement("co2");
+			co2.appendChild(doc.createTextNode(String.format("%.2f", variables.getCo2())));
+			measure.appendChild(co2);
 	 
 			// write the content into xml file
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -88,19 +156,17 @@ public class XML {
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 			transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
 			DOMSource source = new DOMSource(doc);
-			StreamResult result = new StreamResult(new File("measure.xml"));
-	 
-			// Output to console for testing
-			// StreamResult result = new StreamResult(System.out);
-	 
+			StreamResult result = new StreamResult(variables.getFilenameXML());
 			transformer.transform(source, result);
-	 
-			//System.out.println("File saved!");
 	 
 		} catch (ParserConfigurationException pce) {
 			pce.printStackTrace();
 		} catch (TransformerException tfe) {
 			tfe.printStackTrace();
+		} catch (SAXException | IOException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }
