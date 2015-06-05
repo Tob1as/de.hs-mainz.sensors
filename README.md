@@ -17,7 +17,7 @@ Requirement:
 Development:
 --------------
 - [Sensordrone Java Library](http://developer.sensordrone.com/downloads/) -- [sensordrone-java-library-1.3.2-SNAPSHOT](http://developer.sensordrone.com/files/libraries/sensordrone-java-library-1.3.2-SNAPSHOT.jar)
-- [BlueCove](http://bluecove.org/), a Java library for Bluetooth: [bluecove-2.1.1-SNAPSHOT](http://snapshot.bluecove.org/distribution/download/2.1.1-SNAPSHOT/2.1.1-SNAPSHOT.63/bluecove-2.1.1-SNAPSHOT.jar) for Windows + [bluecove-gpl-2.1.1-SNAPSHOT](http://snapshot.bluecove.org/distribution/download/2.1.1-SNAPSHOT/2.1.1-SNAPSHOT.63/bluecove-gpl-2.1.1-SNAPSHOT.jar) for Linux (Install on Linux: libbluetooth-dev | [RaspberryPi](https://www.raspberrypi.org/forums/viewtopic.php?f=81&t=58758))
+- [BlueCove](http://bluecove.org/), a Java library for Bluetooth: [bluecove-2.1.1-SNAPSHOT](http://snapshot.bluecove.org/distribution/download/2.1.1-SNAPSHOT/2.1.1-SNAPSHOT.63/bluecove-2.1.1-SNAPSHOT.jar) for Windows + [bluecove-gpl-2.1.1-SNAPSHOT](http://snapshot.bluecove.org/distribution/download/2.1.1-SNAPSHOT/2.1.1-SNAPSHOT.63/bluecove-gpl-2.1.1-SNAPSHOT.jar) for Linux (Install on Linux: libbluetooth-dev | [Raspberry Pi](https://www.raspberrypi.org/forums/viewtopic.php?f=81&t=58758))
 - JDBC (SQL): [sqlite-jdbc](https://bitbucket.org/xerial/sqlite-jdbc/downloads/sqlite-jdbc-3.8.10.1.jar)
 
 Others:
