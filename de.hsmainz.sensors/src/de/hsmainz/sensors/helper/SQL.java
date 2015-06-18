@@ -1,6 +1,5 @@
 package de.hsmainz.sensors.helper;
 
-import java.io.File;
 import java.sql.*;
 
 public class SQL implements Output {
@@ -22,32 +21,33 @@ public class SQL implements Output {
 	
 	@Override
 	public void write(Variables variables) {
-		if (variables.isSaveSQL()==true && variables.getSqldatabase()== "sqlite") {
-			this.saveMeasureInSQLite(variables);
-		}
-		if (variables.isSaveSQL()==true && variables.getSqldatabase()== "mysql") {
-			this.saveMeasureInMySQL(variables);
-		}
-		if (variables.isSaveSQL()==true && variables.getSqldatabase()== "postgresql") {
-			this.saveMeasureInPostgreSQL(variables);
+		if (variables.isSaveSQL()==true){
+			this.saveMeasureInSQL(variables);
 		}
 	}
 	
-	private void saveMeasureInSQLite(Variables variables) {
-		
-		// TODO SQLite
-		
-		File sqlfile = new File ("sensors.sqlite");
-		
+	private void saveMeasureInSQL(Variables variables) {
 		Connection c = null;
 		Statement stmt = null;
+		
 		try {
-			Class.forName("org.sqlite.JDBC");
-			c = DriverManager.getConnection("jdbc:sqlite:"+sqlfile);
+			if (variables.getSqldatabase()=="sqlite") {
+				Class.forName("org.sqlite.JDBC");
+				c = DriverManager.getConnection("jdbc:sqlite:"+variables.getFilenameSQLite());
+			}
+			if (variables.getSqldatabase()=="mysql") {
+				Class.forName("com.mysql.jdbc.Driver");
+				c = DriverManager.getConnection("jdbc:mysql://"+ variables.getSqlhost() +":"+ variables.getSqlport() +"/"+ variables.getSqltable(),variables.getSqluser(),variables.getSqlpassword());
+			}
+			if (variables.getSqldatabase()=="postgresql") {
+				Class.forName("org.postgresql.Driver");
+				c = DriverManager.getConnection("jdbc:postgresql://"+ variables.getSqlhost() +":"+ variables.getSqlport() +"/"+ variables.getSqltable(),variables.getSqluser(),variables.getSqlpassword());
+			}
+
 			stmt = c.createStatement();
 			
 			// Create Table
-			String sqlcreate = "CREATE TABLE IF NOT EXISTS measure " +
+			String sqlcreate = "CREATE TABLE IF NOT EXISTS "+ variables.getSqltable() +" " +
 					"(ID INT PRIMARY KEY      NOT NULL," +
 					" date           TEXT     NOT NULL, " + 
 					" time           TEXT     NOT NULL, " + 
@@ -66,7 +66,7 @@ public class SQL implements Output {
 					" co2            NUMERIC  NOT NULL)"; 	      
 			stmt.executeUpdate(sqlcreate);
 			// Insert Values
-			String sqlinsert = "INSERT INTO measure"
+			String sqlinsert = "INSERT INTO "+ variables.getSqltable() +" "
 					+ "(ID, date, time, battery, humidity, irtemperature, temperature, dewpoint, pressure, lux, altitude, capacitance, oxidizinggas, precisiongas, reducinggas, co2) " + "VALUES"
 					+ "("+ variables.getId() + ",\'" + variables.getDate() + "\',\'"+ variables.getTime() + "\',"+ variables.getBattery() + ","+ variables.getHumidity() + ","+ variables.getIrtemperature() + ","+ variables.getTemperature() + ","+ variables.getDewpoint() + ","+ variables.getPressure() + ","+ variables.getRgb() + ","+ variables.getAltitude() + ","+ variables.getCapacitance() + ","+ variables.getOxidizinggas() + ","+ variables.getPrecisiongas() + ","+ variables.getReducinggas() + ","+ variables.getCo2() + ")";
 			stmt.executeUpdate(sqlinsert);
@@ -76,18 +76,5 @@ public class SQL implements Output {
 		} catch ( Exception e ) {
 			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 		}
-	}
-	
-	private void saveMeasureInMySQL(Variables variables) {
-		
-		// TODO MySQL
-		
-	}
-	
-	private void saveMeasureInPostgreSQL(Variables variables) {
-		
-		// TODO PostgreSQL
-		
-	}
-	
+	}	
 }

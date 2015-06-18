@@ -5,12 +5,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Variables {
-
+	
+	/*
+	 * Variables
+	 */
+	
 	private Float battery, altitude, capacitance, humidity, irtemperature, oxidizinggas, precisiongas, pressure, reducinggas, rgb, temperature, co2;
-	private String macaddress = "0017ec11c070", sqldatabase = "sqlite";
+	private String macaddress = "0017ec11c070", sqldatabase = "sqlite", sqlhost = "localhost", sqlport, sqltable = "measure", sqluser, sqlpassword, uploadHTTPurl="http://127.0.0.1/sensors.php";
 	private Date currentDate = new Date();
-	private File filenameXML = new File("sensors.xml");
-	private boolean measuredSensorDrone=true, showCLI=true, writeXML=true, saveSQL=true;
+	private File filenameXML = new File("sensors.xml"), filenameSQLite = new File("sensors.sqlite"), filenameConfig = new File("config.xml");
+	private boolean measuredSensorDrone=true, showCLI=true, writeXML=true, saveSQL=true, uploadHTTP=false;
 
 	/*
 	 * Date and Time
@@ -30,29 +34,33 @@ public class Variables {
 		SimpleDateFormat formatDate = new SimpleDateFormat("dd.MM.yyyy");
 		return formatDate.format(currentDate);
 	}
-
-	/*
-	 * File
-	 */
-
-	public File getFilenameXML() {
-		return filenameXML;
-	}
-
-	public void setFilenameXML(File filenameXML) {
-		this.filenameXML = filenameXML;
-	}
 	
 	/*
 	 * Config settings
 	 */
 	
+	public File getFilenameConfig() {
+		return filenameConfig;
+	}
+
+	public void setFilenameConfig(File filenameConfig) {
+		this.filenameConfig = filenameConfig;
+	}
+
 	public boolean isMeasuredSensorDrone() {
 		return measuredSensorDrone;
 	}
 
 	public void setMeasuredSensorDrone(boolean measuredSensorDrone) {
 		this.measuredSensorDrone = measuredSensorDrone;
+	}
+	
+	public String getMacaddress() {
+		return macaddress;
+	}
+
+	public void setMacaddress(String macaddress) {
+		this.macaddress = macaddress;
 	}
 	
 	public boolean isShowCLI() {
@@ -70,6 +78,16 @@ public class Variables {
 	public void setWriteXML(boolean writeXML) {
 		this.writeXML = writeXML;
 	}
+	
+	public File getFilenameXML() {
+		return filenameXML;
+	}
+
+	public void setFilenameXML(File filenameXML) {
+		if (filenameXML != null && filenameXML != new File("")){
+			this.filenameXML = filenameXML;
+		} 
+	}
 
 	public boolean isSaveSQL() {
 		return saveSQL;
@@ -86,22 +104,99 @@ public class Variables {
 	public void setSqldatabase(String sqldatabase) {
 		if (sqldatabase == "sqlite" || sqldatabase == "mysql" || sqldatabase == "postgresql"){
 			this.sqldatabase = sqldatabase;
-		} else {
-			this.sqldatabase = "sqlite";
+		} 
+	}
+	
+	public File getFilenameSQLite() {
+		return filenameSQLite;
+	}
+
+	public void setFilenameSQLite(File filenameSQLite) {
+		if (filenameSQLite != null && filenameSQLite != new File("")){
+			this.filenameSQLite = filenameSQLite;
+		} 		
+	}
+	
+	public String getSqlhost() {
+		return sqlhost;
+	}
+
+	public void setSqlhost(String sqlhost) {
+		if (sqlhost!=null && sqlhost.isEmpty()){
+			this.sqlhost = sqlhost;
 		}
 	}
 
+	public String getSqlport() {
+		return sqlport;
+	}
+
+	public void setSqlport(String sqlport) {
+		if (sqlport!=null && sqlport.isEmpty()){
+			this.sqlport = sqlport;
+		} else {
+			if (this.getSqldatabase()=="mysql"){
+				this.sqlport = "3306";
+			}
+			if (this.getSqldatabase()=="postgresql"){
+				this.sqlport = "5432";
+			}
+		}
+	}
+
+	public String getSqltable() {
+		return sqltable;
+	}
+
+	public void setSqltable(String sqltable) {
+		if (sqltable!=null && !sqltable.isEmpty()){
+			this.sqltable = sqltable;
+		}
+	}
+
+	public String getSqluser() {
+		return sqluser;
+	}
+
+	public void setSqluser(String sqluser) {
+		this.sqluser = sqluser;
+	}
+
+	public String getSqlpassword() {
+		return sqlpassword;
+	}
+
+	public void setSqlpassword(String sqlpassword) {
+		this.sqlpassword = sqlpassword;
+	}
+	
+	public boolean isUploadHTTP() {
+		return uploadHTTP;
+	}
+
+	public void setUploadHTTP(boolean uploadHTTP) {
+		this.uploadHTTP = uploadHTTP;
+	}
+
+	public String getUploadHTTPurl() {
+		return uploadHTTPurl;
+	}
+
+	public void setUploadHTTPurl(String uploadHTTPurl) {
+		this.uploadHTTPurl = uploadHTTPurl;
+	}
+	
+	public boolean checkStatus(Object object){
+		if (object.equals("enable") || object.equals("true") || object.equals("1")){
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	/*
-	 * Drone
+	 * Measure
 	 */
-
-	public String getMacaddress() {
-		return macaddress;
-	}
-
-	public void setMacaddress(String macaddress) {
-		this.macaddress = macaddress;
-	}
 
 	public Float getBattery() {
 		return battery;
@@ -148,7 +243,7 @@ public class Variables {
 	}
 
 	public void setOxidizinggas(Float oxidizinggas) {
-		this.oxidizinggas = oxidizinggas / 1000; // divided by 1000 to convert Ohm to KOhms
+		this.oxidizinggas = oxidizinggas/1000; // divided by 1000 to convert Ohm to KOhms
 	}
 
 	public Float getPrecisiongas() {
@@ -164,7 +259,7 @@ public class Variables {
 	}
 
 	public void setPressure(Float pressure) {
-		this.pressure = pressure / 100; // divided by 100 to convert Ph to hPa
+		this.pressure = pressure/100; // divided by 100 to convert Ph to hPa
 	}
 
 	public Float getReducinggas() {
@@ -172,7 +267,7 @@ public class Variables {
 	}
 
 	public void setReducinggas(Float reducinggas) {
-		this.reducinggas = reducinggas / 1000; // divided by 1000 to convert Ohm to KOhms
+		this.reducinggas = reducinggas/1000; // divided by 1000 to convert Ohm to KOhms
 	}
 
 	public Float getRgb() {
@@ -204,7 +299,7 @@ public class Variables {
 	}
 
 	/*
-	 * Calculations
+	 * Calculations and more
 	 */
 
 	public Float getDewpoint() {
@@ -221,7 +316,7 @@ public class Variables {
 	}
 
 	// CO2 Sensor / UART
-	public float getIntValueFromUartResponse(byte[] response) {
+	public float getFloatValueFromUartResponse(byte[] response) {
 		String ascii = "";
 		int index = 0;
 		byte b = response[index];

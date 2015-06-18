@@ -143,12 +143,13 @@ public class Sensordrone implements ISensor {
 	}
 	
 	private void measureCO2() {
+		// CO2 Sensor http://www.mb-systemtechnik.de/produkte_co2_messung_co2_sensor_modul_mit_ausgang.htm
 		// Set baudrate
 		drone.setBaudRate_38400();
 		// Command
 		byte[] getStatusCommand = { 0x23, 0x31, 0x30, 0x0D }; // 10 (Read status)
 		// UART Write/Read
 		byte[] response = drone.uartWriteForRead(getStatusCommand, 5);
-		variables.setCo2(variables.getIntValueFromUartResponse(response));
+		variables.setCo2(variables.getFloatValueFromUartResponse(response));
 	}
 }

@@ -63,7 +63,7 @@ public class XML implements Output {
 	 
 			// measure elements
 			Element measure = doc.createElement("measure");
-			rootElement.appendChild(measure); // "sensors" instead "rootElement" when add new measured in a exitens xml file for whitespace (indent-amount) ??
+			rootElement.appendChild(measure);
 	 
 			// set attribute to measure element
 			Attr attr = doc.createAttribute("id");
