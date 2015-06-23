@@ -18,7 +18,7 @@ public class SQL implements Output {
 	 * http://www.tutorialspoint.com/jdbc/jdbc-sample-code.htm AND http://www.tutorialspoint.com/postgresql/postgresql_java.htm AND http://www.tutorialspoint.com/sqlite/sqlite_java.htm
 	 * http://de.wikibooks.org/wiki/Java_Standard:_JDBC
 	 * 
-	 * https://bitbucket.org/xerial/sqlite-jdbc/downloads
+	 * https://bitbucket.org/xerial/sqlite-jdbc/downloads , http://dev.mysql.com/downloads/connector/j/ , https://jdbc.postgresql.org/download.html
 	 * 
 	 */
 	
@@ -26,9 +26,7 @@ public class SQL implements Output {
 	
 	@Override
 	public void write(Variables variables) {
-		if (variables.isSaveSQL()==true){
 			this.saveMeasureInSQL(variables);
-		}
 	}
 	
 	private void saveMeasureInSQL(Variables variables) {
