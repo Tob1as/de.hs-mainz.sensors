@@ -1,4 +1,6 @@
-package de.hsmainz.sensors.helper;
+package de.hsmainz.sensors.interfaces;
+
+import de.hsmainz.sensors.helper.Variables;
 
 public interface Output {
 	

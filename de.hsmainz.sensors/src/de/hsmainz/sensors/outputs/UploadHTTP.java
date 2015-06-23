@@ -1,4 +1,7 @@
-package de.hsmainz.sensors.helper;
+package de.hsmainz.sensors.outputs;
+
+import de.hsmainz.sensors.helper.Variables;
+import de.hsmainz.sensors.interfaces.Output;
 
 public class UploadHTTP implements Output{
 

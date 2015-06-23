@@ -3,13 +3,14 @@ package de.hsmainz.sensors;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.hsmainz.sensors.helper.CLI;
 import de.hsmainz.sensors.helper.Config;
-import de.hsmainz.sensors.helper.Output;
-import de.hsmainz.sensors.helper.SQL;
-import de.hsmainz.sensors.helper.UploadHTTP;
 import de.hsmainz.sensors.helper.Variables;
-import de.hsmainz.sensors.helper.XML;
+import de.hsmainz.sensors.interfaces.ISensor;
+import de.hsmainz.sensors.interfaces.Output;
+import de.hsmainz.sensors.outputs.CLI;
+import de.hsmainz.sensors.outputs.SQL;
+import de.hsmainz.sensors.outputs.UploadHTTP;
+import de.hsmainz.sensors.outputs.XML;
 
 public class Main {
 

@@ -96,24 +96,27 @@ public class Config {
 			attr.setValue(ed(variables.isSaveSQL()));
 			outputSQL.setAttributeNode(attr);
 			attr = doc.createAttribute("sql0Type");
-			attr.setValue(variables.getSqldatabase());
+			attr.setValue(variables.getSqldatabasetype());
 			outputSQL.setAttributeNode(attr);
 			attr = doc.createAttribute("sql1File");
 			attr.setValue(variables.getFilenameSQLite().toString());
 			outputSQL.setAttributeNode(attr);
-			attr = doc.createAttribute("sql2Table");
+			attr = doc.createAttribute("sql2Database");
+			attr.setValue(variables.getSqldatabasename());
+			outputSQL.setAttributeNode(attr);
+			attr = doc.createAttribute("sql3Table");
 			attr.setValue(variables.getSqltable());
 			outputSQL.setAttributeNode(attr);
-			attr = doc.createAttribute("sql3Host");
+			attr = doc.createAttribute("sql4Host");
 			attr.setValue(variables.getSqlhost());
 			outputSQL.setAttributeNode(attr);
-			attr = doc.createAttribute("sql4Port");
+			attr = doc.createAttribute("sql5Port");
 			attr.setValue(variables.getSqlport());
 			outputSQL.setAttributeNode(attr);
-			attr = doc.createAttribute("sql5User");
+			attr = doc.createAttribute("sql6User");
 			attr.setValue(variables.getSqluser());
 			outputSQL.setAttributeNode(attr);
-			attr = doc.createAttribute("sql6Password");
+			attr = doc.createAttribute("sql7Password");
 			attr.setValue(variables.getSqlpassword());
 			outputSQL.setAttributeNode(attr);
 			
@@ -122,6 +125,9 @@ public class Config {
 			rootElement.appendChild(outputHTTP);
 			attr = doc.createAttribute("Status");
 			attr.setValue(ed(variables.isUploadHTTP()));
+			outputHTTP.setAttributeNode(attr);
+			attr = doc.createAttribute("securityKey");
+			attr.setValue(variables.getUploadHTTPsecurityKey());
 			outputHTTP.setAttributeNode(attr);
 			attr = doc.createAttribute("url");
 			attr.setValue(variables.getUploadHTTPurl());
@@ -171,17 +177,19 @@ public class Config {
 			// outputSQL elements and attribute
 			Element outputSQL = (Element) doc.getDocumentElement().getElementsByTagName("outputSQL").item(0);
 			variables.setSaveSQL(variables.checkStatus(outputSQL.getAttribute("Status")));
-			variables.setSqldatabase(outputSQL.getAttribute("sql0Type"));
+			variables.setSqldatabasetype(outputSQL.getAttribute("sql0Type"));
 			variables.setFilenameSQLite(new File(outputSQL.getAttribute("sql1File")));
-			variables.setSqltable(outputSQL.getAttribute("sql2Table"));
-			variables.setSqlhost(outputSQL.getAttribute("sql3Host"));
-			variables.setSqlport(outputSQL.getAttribute("sql4Port"));
-			variables.setSqluser(outputSQL.getAttribute("sql5User"));
-			variables.setSqlpassword(outputSQL.getAttribute("sql6Password"));
+			variables.setSqldatabasename(outputSQL.getAttribute("sql2Database"));
+			variables.setSqltable(outputSQL.getAttribute("sql3Table"));
+			variables.setSqlhost(outputSQL.getAttribute("sql4Host"));
+			variables.setSqlport(outputSQL.getAttribute("sql5Port"));
+			variables.setSqluser(outputSQL.getAttribute("sql6User"));
+			variables.setSqlpassword(outputSQL.getAttribute("sql7Password"));
 			
 			// outputHTTP elements and attribute
 			Element outputHTTP = (Element) doc.getDocumentElement().getElementsByTagName("outputHTTP").item(0);
 			variables.setUploadHTTP(variables.checkStatus(outputHTTP.getAttribute("Status")));
+			variables.setUploadHTTPsecurityKey(outputHTTP.getAttribute("securityKey"));
 			variables.setUploadHTTPurl(outputHTTP.getAttribute("url"));
 			
 		} catch (ParserConfigurationException pce) {

@@ -1,4 +1,4 @@
-package de.hsmainz.sensors.helper;
+package de.hsmainz.sensors.outputs;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -17,6 +17,9 @@ import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element; 
 import org.xml.sax.SAXException;
+
+import de.hsmainz.sensors.helper.Variables;
+import de.hsmainz.sensors.interfaces.Output;
 
 public class XML implements Output {
 	
@@ -147,6 +150,11 @@ public class XML implements Output {
 			Element co2 = doc.createElement("co2");
 			co2.appendChild(doc.createTextNode(String.format("%.2f", variables.getCo2())));
 			measure.appendChild(co2);
+			
+			// description elements
+			//Element description = doc.createElement("description");
+			//description.appendChild(doc.createTextNode(variables.getDescription()));
+			//measure.appendChild(description);
 	 
 			// write the content into xml file
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();

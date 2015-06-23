@@ -11,7 +11,7 @@ public class Variables {
 	 */
 	
 	private Float battery, altitude, capacitance, humidity, irtemperature, oxidizinggas, precisiongas, pressure, reducinggas, rgb, temperature, co2;
-	private String macaddress = "0017ec11c070", sqldatabase = "sqlite", sqlhost = "localhost", sqlport, sqltable = "measure", sqluser, sqlpassword, uploadHTTPurl="http://127.0.0.1/sensors.php";
+	private String macaddress = "0017ec11c070", sqldatabasetype = "sqlite", sqlhost = "localhost", sqldatabasename, sqlport, sqltable = "measure", sqluser, sqlpassword, uploadHTTPurl="http://127.0.0.1/sensors.php", uploadHTTPsecurityKey, description="";
 	private Date currentDate = new Date();
 	private File filenameXML = new File("sensors.xml"), filenameSQLite = new File("sensors.sqlite"), filenameConfig = new File("config.xml");
 	private boolean measuredSensorDrone=true, showCLI=true, writeXML=true, saveSQL=true, uploadHTTP=false;
@@ -97,13 +97,13 @@ public class Variables {
 		this.saveSQL = saveSQL;
 	}
 	
-	public String getSqldatabase() {
-		return sqldatabase;
+	public String getSqldatabasetype() {
+		return sqldatabasetype;
 	}
 
-	public void setSqldatabase(String sqldatabase) {
-		if (sqldatabase == "sqlite" || sqldatabase == "mysql" || sqldatabase == "postgresql"){
-			this.sqldatabase = sqldatabase;
+	public void setSqldatabasetype(String sqldatabasetype) {
+		if (sqldatabasetype.equalsIgnoreCase("sqlite") || sqldatabasetype.equalsIgnoreCase("mysql") || sqldatabasetype.equalsIgnoreCase("postgresql")){
+			this.sqldatabasetype = sqldatabasetype;
 		} 
 	}
 	
@@ -122,7 +122,7 @@ public class Variables {
 	}
 
 	public void setSqlhost(String sqlhost) {
-		if (sqlhost!=null && sqlhost.isEmpty()){
+		if (sqlhost!=null && !sqlhost.isEmpty()){
 			this.sqlhost = sqlhost;
 		}
 	}
@@ -132,16 +132,24 @@ public class Variables {
 	}
 
 	public void setSqlport(String sqlport) {
-		if (sqlport!=null && sqlport.isEmpty()){
+		if (sqlport!=null && !sqlport.isEmpty()){
 			this.sqlport = sqlport;
 		} else {
-			if (this.getSqldatabase()=="mysql"){
+			if (this.getSqldatabasetype().equalsIgnoreCase("mysql")){
 				this.sqlport = "3306";
 			}
-			if (this.getSqldatabase()=="postgresql"){
+			if (this.getSqldatabasetype().equalsIgnoreCase("postgresql")){
 				this.sqlport = "5432";
 			}
 		}
+	}
+
+	public String getSqldatabasename() {
+		return sqldatabasename;
+	}
+
+	public void setSqldatabasename(String sqldatabasename) {
+		this.sqldatabasename = sqldatabasename;
 	}
 
 	public String getSqltable() {
@@ -186,12 +194,28 @@ public class Variables {
 		this.uploadHTTPurl = uploadHTTPurl;
 	}
 	
+	public String getUploadHTTPsecurityKey() {
+		return uploadHTTPsecurityKey;
+	}
+
+	public void setUploadHTTPsecurityKey(String uploadHTTPsecurityKey) {
+		this.uploadHTTPsecurityKey = uploadHTTPsecurityKey;
+	}
+
 	public boolean checkStatus(Object object){
 		if (object.equals("enable") || object.equals("true") || object.equals("1")){
 			return true;
 		} else {
 			return false;
 		}
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 	/*

@@ -1,4 +1,7 @@
-package de.hsmainz.sensors.helper;
+package de.hsmainz.sensors.outputs;
+
+import de.hsmainz.sensors.helper.Variables;
+import de.hsmainz.sensors.interfaces.Output;
 
 public class CLI implements Output {
 
@@ -16,13 +19,13 @@ public class CLI implements Output {
 		System.out.println("ID: " + variables.getId());
 		System.out.println("Date: " + variables.getDate());
 		System.out.println("Time: " + variables.getTime());
-		System.out.println(String.format("%.2f V Batterie", variables.getBattery()));
-		System.out.println(String.format("%.2f", variables.getHumidity()) + " \u0025 Luftfeuchtigkeit");
-		System.out.println(String.format("%.2f \u00B0C Infrarot Temperatur", variables.getIrtemperature()));
-		System.out.println(String.format("%.2f \u00B0C Temperatur", variables.getTemperature()));
-		System.out.println(String.format("%.2f \u00B0C Taupunkt", variables.getDewpoint()));
-		System.out.println(String.format("%.2f hPa Luftdruck", variables.getPressure()));
-		System.out.println(String.format("%.2f lux Helligkeit", variables.getRgb()));
+		System.out.println(String.format("%.2f V Battery", variables.getBattery()));
+		System.out.println(String.format("%.2f", variables.getHumidity()) + " \u0025 Humidity");
+		System.out.println(String.format("%.2f \u00B0C Infrared Temperature", variables.getIrtemperature()));
+		System.out.println(String.format("%.2f \u00B0C Temperature", variables.getTemperature()));
+		System.out.println(String.format("%.2f \u00B0C Dew Point", variables.getDewpoint()));
+		System.out.println(String.format("%.2f hPa Air Pressure", variables.getPressure()));
+		System.out.println(String.format("%.2f lux Luminosity", variables.getRgb()));
 		System.out.println(variables.getAltitude() + " Altitude");
 		System.out.println(variables.getCapacitance() + " Capacitance");
 		System.out.println(String.format("%.2f KOhms Oxidizing Gas", variables.getOxidizinggas()));

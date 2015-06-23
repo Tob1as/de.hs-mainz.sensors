@@ -6,6 +6,7 @@ import com.sensorcon.sensordrone.DroneEventObject;
 import com.sensorcon.sensordrone.java.Drone;
 
 import de.hsmainz.sensors.helper.Variables;
+import de.hsmainz.sensors.interfaces.ISensor;
 
 
 public class Sensordrone implements ISensor {

@@ -1,4 +1,4 @@
-package de.hsmainz.sensors;
+package de.hsmainz.sensors.interfaces;
 
 import de.hsmainz.sensors.helper.Variables;
 
