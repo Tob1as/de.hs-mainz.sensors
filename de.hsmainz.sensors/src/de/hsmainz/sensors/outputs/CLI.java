@@ -19,6 +19,7 @@ public class CLI implements Output {
 		System.out.println("ID: " + variables.getId());
 		System.out.println("Date: " + variables.getDate());
 		System.out.println("Time: " + variables.getTime());
+		System.out.println("Description: " + variables.getDescription());
 		System.out.println(String.format("%.2f V Battery", variables.getBattery()));
 		System.out.println(String.format("%.2f", variables.getHumidity()) + " \u0025 Humidity");
 		System.out.println(String.format("%.2f \u00B0C Infrared Temperature", variables.getIrtemperature()));

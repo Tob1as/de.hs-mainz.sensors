@@ -12,7 +12,7 @@ import de.hsmainz.sensors.interfaces.Output;
 public class UploadHTTP implements Output{
 
 	/*
-	 * Upload measure via http (php script into Database, when sql no direct connecten)
+	 * Upload measure via http (php script into Database, when sql no direct connect)
 	 */
 	
 	/*
@@ -36,7 +36,7 @@ public class UploadHTTP implements Output{
 			// activate the output
 			con.setDoOutput(true);
 			PrintStream ps = new PrintStream(con.getOutputStream());
-			// send your parameters to your site
+			// send your parameters to the site
 			ps.print("securityKey="+variables.getUploadHTTPsecurityKey());
 			ps.print("&id="+variables.getId());
 			ps.print("&date="+variables.getDate());
@@ -56,7 +56,7 @@ public class UploadHTTP implements Output{
 			ps.print("&co2="+variables.getCo2());
 			ps.print("&description="+variables.getDescription());
 			
-			// we have to get the input stream in order to actually send the request
+			// get the input stream in order to actually send the request
 		    con.getInputStream();
 		    
 		    // close the print stream

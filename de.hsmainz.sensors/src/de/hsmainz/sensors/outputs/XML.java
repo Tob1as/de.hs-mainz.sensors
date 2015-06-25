@@ -63,7 +63,7 @@ public class XML implements Output {
 				doc.appendChild(rootElement);
 			}
 			
-	 
+			
 			// measure elements
 			Element measure = doc.createElement("measure");
 			rootElement.appendChild(measure);
@@ -152,9 +152,9 @@ public class XML implements Output {
 			measure.appendChild(co2);
 			
 			// description elements
-			//Element description = doc.createElement("description");
-			//description.appendChild(doc.createTextNode(variables.getDescription()));
-			//measure.appendChild(description);
+			Element description = doc.createElement("description");
+			description.appendChild(doc.createTextNode(variables.getDescription()));
+			measure.appendChild(description);
 	 
 			// write the content into xml file
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();

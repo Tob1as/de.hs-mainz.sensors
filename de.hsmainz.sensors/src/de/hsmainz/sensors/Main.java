@@ -25,9 +25,11 @@ public class Main {
 		Config conf = new Config();
 		conf.config(variables);
 		
+		// Sensors list
 		List<ISensor> lst = new ArrayList<ISensor>();
 		if (variables.isMeasuredSensorDrone()==true){lst.add(new Sensordrone(variables));}
 		
+		// execute sensors and write measure
 		try {
 			for (ISensor sensor : lst) {
 				sensor.execute();
@@ -43,7 +45,8 @@ public class Main {
 	}
 
 	public static void output(Variables variables) {
-
+		
+		// Output list
 		List<Output> lst = new ArrayList<Output>();
 		if (variables.isShowCLI()==true){lst.add(new CLI());}
 		if (variables.isWriteXML()==true){lst.add(new XML());}

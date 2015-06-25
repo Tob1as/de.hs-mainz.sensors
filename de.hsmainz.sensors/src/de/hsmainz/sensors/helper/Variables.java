@@ -201,14 +201,6 @@ public class Variables {
 	public void setUploadHTTPsecurityKey(String uploadHTTPsecurityKey) {
 		this.uploadHTTPsecurityKey = uploadHTTPsecurityKey;
 	}
-
-	public boolean checkStatus(Object object){
-		if (object.equals("enable") || object.equals("true") || object.equals("1")){
-			return true;
-		} else {
-			return false;
-		}
-	}
 	
 	public String getDescription() {
 		return description;
@@ -216,6 +208,14 @@ public class Variables {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	public boolean checkStatus(Object object){
+		if (((String) object).equalsIgnoreCase("enable") || ((String) object).equalsIgnoreCase("true") || object.equals("1")){
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	/*
@@ -358,9 +358,9 @@ public class Variables {
 					// give number back
 					//return Integer.parseInt(ascii.trim());
 					
-					// Note: Sometimes, the CO2 sensor 10 (ReadStatus) returns, if it is not connected to the power! solution!?
 					ascii = ascii.trim();
 					float uartvalue = Float.parseFloat(ascii);
+					// Note: Sometimes, the CO2 sensor 10 (ReadStatus) returns, if it is not connected to the power!
 					if (uartvalue == 10 || ascii == null){ 
 						uartvalue = -1;
 					}

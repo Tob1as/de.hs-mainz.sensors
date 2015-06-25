@@ -59,13 +59,8 @@ public class Config {
 			// sensordrone elements and attribute
 			Element sensordrone = doc.createElement("sensordrone");
 			rootElement.appendChild(sensordrone);
-	 
 			attr = doc.createAttribute("Status");
-			if (variables.isMeasuredSensorDrone()==true){
-				attr.setValue("enable");
-			} else {
-				attr.setValue("disable");
-			}
+			attr.setValue(ed(variables.isMeasuredSensorDrone()));
 			sensordrone.setAttributeNode(attr);
 			attr = doc.createAttribute("macAddress");
 			attr.setValue(variables.getMacaddress());
@@ -74,7 +69,6 @@ public class Config {
 			// outputCLI elements and attribute
 			Element outputCLI = doc.createElement("outputCLI");
 			rootElement.appendChild(outputCLI);
-	 
 			attr = doc.createAttribute("Status");
 			attr.setValue(ed(variables.isSaveSQL()));
 			outputCLI.setAttributeNode(attr);
@@ -132,6 +126,13 @@ public class Config {
 			attr = doc.createAttribute("url");
 			attr.setValue(variables.getUploadHTTPurl());
 			outputHTTP.setAttributeNode(attr);
+			
+			// general settings elements and attribute
+			Element general = doc.createElement("general");
+			rootElement.appendChild(general);
+			attr = doc.createAttribute("description");
+			attr.setValue(variables.getDescription());
+			general.setAttributeNode(attr);
 	 
 			// write the settings/config into xml file
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -157,6 +158,7 @@ public class Config {
 		try {
 			docFactory = DocumentBuilderFactory.newInstance();
 			docBuilder = docFactory.newDocumentBuilder();
+			
 			doc = docBuilder.parse(new FileInputStream(variables.getFilenameConfig()));
 			rootElement = doc.getDocumentElement();
 			
@@ -191,6 +193,10 @@ public class Config {
 			variables.setUploadHTTP(variables.checkStatus(outputHTTP.getAttribute("Status")));
 			variables.setUploadHTTPsecurityKey(outputHTTP.getAttribute("securityKey"));
 			variables.setUploadHTTPurl(outputHTTP.getAttribute("url"));
+			
+			// general settings elements and attribute
+			Element general = (Element) doc.getDocumentElement().getElementsByTagName("general").item(0);
+			variables.setDescription(general.getAttribute("description"));
 			
 		} catch (ParserConfigurationException pce) {
 			pce.printStackTrace();
