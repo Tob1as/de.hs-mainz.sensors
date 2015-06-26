@@ -29,4 +29,4 @@ Requirement for Development:
 Others:
 --------------
 - Year: 2015
-- de.hsmainz.sensors developed by [Tobias H.](https://github.com/TobiasH87) of the [HS-Mainz](http://gi.hs-mainz.de/)
+- de.hsmainz.sensors developed by [Tobias H.](https://github.com/TobiasH87) of the [Hochschule Mainz - University of Applied Sciences Mainz](http://gi.hs-mainz.de/)
