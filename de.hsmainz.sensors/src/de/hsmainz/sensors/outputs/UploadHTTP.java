@@ -6,6 +6,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
+import de.hsmainz.sensors.helper.SSLCertificateValidation;
 import de.hsmainz.sensors.helper.Variables;
 import de.hsmainz.sensors.interfaces.Output;
 
@@ -30,6 +31,10 @@ public class UploadHTTP implements Output{
 	
 	private void uploadMeasure(Variables variables) {
 		try {
+			
+			// disable SSL certificate validation in Java!
+			SSLCertificateValidation.disable();
+			
 			// open a connection to the site
 			URL url = new URL(variables.getUploadHTTPurl());
 			URLConnection con = url.openConnection();
