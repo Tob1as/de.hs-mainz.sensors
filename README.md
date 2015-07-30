@@ -11,7 +11,7 @@ Functions:
 -- Humidity, IR Temperature (in Celsius), Temperature (in Celsius), Pressure, Luminosity, CO2 and more
 - Save measure in xml file and/or SQL Database (SQLite, MySQL, PostgreSQL)
 - For settings use the generate config.xml-file
-- It works on Windows, Linux and Raspberry Pi (bluecove_arm)
+- It works on Windows, Linux and Raspberry Pi 2 B (bluecove_arm)
 
 Requirement to use:
 --------------
