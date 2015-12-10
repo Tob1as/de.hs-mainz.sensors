@@ -16,7 +16,7 @@ Functions:
 Requirement to use:
 --------------
 - Bluetooth Adapter [Example: LogiLink BT0015](http://www.logilink.org/showproduct/BT0015.htm?seticlanguage=en) or onboard Bluetooth
-- Sensordrone by [Sensorcon.com](http://sensorcon.com/products/sensordrone-multisensor-tool)
+- [Sensordrone](http://sensordrone.com/index.php) by Sensorcon
 - optional: [CO2-Sensor-Modul](http://www.mb-systemtechnik.de/produkte_co2_messung_co2_sensor_modul_mit_ausgang.htm) via UART
 
 Requirement for Development:
