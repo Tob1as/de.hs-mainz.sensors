@@ -5,3 +5,6 @@
 /sensorsdata/config.xml
 /sensorsdata/sensors.sqlite
 /sensorsdata/sensors.xml
+config.xml
+sensors.sqlite
+sensors.xml
