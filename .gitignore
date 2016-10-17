@@ -1,0 +1,7 @@
+/target/
+.settings
+.classpath
+.project
+/sensorsdata/config.xml
+/sensorsdata/sensors.sqlite
+/sensorsdata/sensors.xml

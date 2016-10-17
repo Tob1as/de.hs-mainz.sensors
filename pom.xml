@@ -1,0 +1,118 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>de.hs_mainz</groupId>
+	<artifactId>Sensors</artifactId>
+	<version>1.0.2</version>
+	<packaging>jar</packaging>
+
+	<name>Sensors</name>
+	<url>https://gitlab.i3mainz.hs-mainz.de/tobias.hargesheimer/Sensors</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
+
+	<repositories>
+		<repository>
+			<id>mvnrepository</id>
+			<url>https://mvnrepository.com/artifact</url>
+		</repository>
+		<repository>
+			<id>pyx4me.com</id>
+			<url>http://www.pyx4me.com/maven2-snapshot</url>
+		</repository>
+		<!-- <repository> <id>mvnrepo.i3mainz.hs-mainz.de</id> <url>https://mvnrepo.i3mainz.hs-mainz.de/artifactory/ext-snapshot-local</url> 
+			</repository> -->
+		<repository>
+			<id>project.local</id>
+			<name>project</name>
+			<url>file:${project.basedir}/repo</url>
+		</repository>
+	</repositories>
+
+	<build>
+		<finalName>Sensors</finalName>
+		<plugins>
+			<!-- Maven Assembly Plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<!-- get all project dependencies -->
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+					<!-- MainClass in mainfest make a executable jar -->
+					<archive>
+						<manifest>
+							<mainClass>de.hs_mainz.Sensors.Main</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<!-- bind to the packaging phase -->
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- ADD A REFERENCE TO THE MAVEN WRAPPER PLUGIN -->
+			<plugin>
+				<groupId>com.rimerosolutions.maven.plugins</groupId>
+				<artifactId>wrapper-maven-plugin</artifactId>
+				<version>0.0.5</version>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<!-- <dependency> <groupId>junit</groupId> <artifactId>junit</artifactId> 
+			<version>3.8.1</version> <scope>test</scope> </dependency> -->
+
+		<dependency>
+			<groupId>com.sensorcon.sensordrone</groupId>
+			<artifactId>sensordrone-java-library</artifactId>
+			<version>1.3.2-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>net.sf.bluecove</groupId>
+			<artifactId>bluecove</artifactId>
+			<version>2.1.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.bluecove</groupId>
+			<artifactId>bluecove-gpl-extended</artifactId>
+			<version>2.1.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.35</version>
+		</dependency>
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>9.4-1201-jdbc41</version>
+		</dependency>
+		<dependency>
+			<groupId>org.xerial</groupId>
+			<artifactId>sqlite-jdbc</artifactId>
+			<version>3.8.10.1</version>
+		</dependency>
+	</dependencies>
+	<organization>
+		<name>Hochschule Mainz</name>
+		<url>https://www.hs-mainz.de/</url>
+	</organization>
+	<description>Java application for Sensordrone with many sensors and CO2-sensor modul.</description>
+</project>

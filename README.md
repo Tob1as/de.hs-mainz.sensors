@@ -16,7 +16,7 @@ Functions:
 Requirement to use:
 --------------
 - Bluetooth Adapter [Example: LogiLink BT0015](http://www.logilink.org/showproduct/BT0015.htm?seticlanguage=en) or onboard Bluetooth
-- [Sensordrone](http://sensordrone.com/index.php) by Sensorcon
+- Sensordrone by [Sensorcon.com](http://sensorcon.com/products/sensordrone-multisensor-tool)
 - optional: [CO2-Sensor-Modul](http://www.mb-systemtechnik.de/produkte_co2_messung_co2_sensor_modul_mit_ausgang.htm) via UART
 
 Requirement for Development:
@@ -29,4 +29,4 @@ Requirement for Development:
 Others:
 --------------
 - Year: 2015
-- de.hsmainz.sensors developed by [Tobias H.](https://github.com/TobiasH87) of the [Hochschule Mainz - University of Applied Sciences Mainz](http://gi.hs-mainz.de/)
+- de.hs_mainz.sensors developed by [Tobias H.](https://www.hs-mainz.de/hochschule/personenverzeichnis/alle-anzeigen/profil/hargesheimer-tobias/index.html) of the [Hochschule Mainz - University of Applied Sciences Mainz](http://gi.hs-mainz.de/)

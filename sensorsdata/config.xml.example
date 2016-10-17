@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sensorsConfig>
+  <sensordrone Status="enable" macAddress="0017ec11c070"/>
+  <outputCLI Status="enable"/>
+  <outputXML Status="enable" file="sensors.xml"/>
+  <outputSQL Status="enable" sql0Type="sqlite" sql1File="sensors.sqlite" sql2Database="" sql3Table="measure" sql4Host="localhost" sql5Port="" sql6User="" sql7Password=""/>
+  <outputHTTP Status="disable" securityKey="" url="http://127.0.0.1/sensors.php"/>
+  <general description=""/>
+</sensorsConfig>

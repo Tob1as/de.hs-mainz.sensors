@@ -1,0 +1,13 @@
+build:
+  before_script:
+    - chmod +x ./mvnw
+  script:
+    - ./mvnw clean package
+  only:
+    - tags
+  artifacts:
+    paths:
+    - target/*.jar
+  tags:
+    - java8
+
