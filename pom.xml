@@ -8,7 +8,7 @@
 	<packaging>jar</packaging>
 
 	<name>Sensors</name>
-	<url>https://gitlab.i3mainz.hs-mainz.de/tobias.hargesheimer/Sensors</url>
+	<url>https://github.com/TobiasH87/de.hs-mainz.sensors</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -17,6 +17,7 @@
 	</properties>
 
 	<repositories>
+		<!--
 		<repository>
 			<id>mvnrepository</id>
 			<url>https://mvnrepository.com/artifact</url>
@@ -25,8 +26,8 @@
 			<id>pyx4me.com</id>
 			<url>http://www.pyx4me.com/maven2-snapshot</url>
 		</repository>
-		<!-- <repository> <id>mvnrepo.i3mainz.hs-mainz.de</id> <url>https://mvnrepo.i3mainz.hs-mainz.de/artifactory/ext-snapshot-local</url> 
-			</repository> -->
+		-->
+		<!-- <repository> <id>mvnrepo.i3mainz.hs-mainz.de</id> <url>https://mvnrepo.i3mainz.hs-mainz.de/artifactory/ext-snapshot-local</url> </repository> -->
 		<repository>
 			<id>project.local</id>
 			<name>project</name>
