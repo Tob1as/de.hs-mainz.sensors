@@ -29,4 +29,4 @@ Requirement for Development:
 Others:
 --------------
 - Year: 2015
-- de.hs_mainz.sensors developed by [Tobias H.](https://www.hs-mainz.de/hochschule/personenverzeichnis/alle-anzeigen/profil/hargesheimer-tobias/index.html) of the [Hochschule Mainz - University of Applied Sciences Mainz](http://gi.hs-mainz.de/)
+- de.hs_mainz.sensors developed by Tobias H. of the [Hochschule Mainz - University of Applied Sciences Mainz](http://gi.hs-mainz.de/)
